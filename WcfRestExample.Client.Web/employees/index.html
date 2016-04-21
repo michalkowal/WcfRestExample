@@ -1,0 +1,36 @@
+﻿<div class="mdl-cell mdl-cell--12-col">
+    <h5>Employees List</h5>
+</div>
+<div class="mdl-cell mdl-cell--12-col">
+    <table id="employees-list" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th class="mdl-data-table__cell--non-numeric">Name</th>
+                <th class="mdl-data-table__cell--non-numeric">Address</th>
+                <th class="mdl-data-table__cell--non-numeric">Email</th>
+                <th class="mdl-data-table__cell--non-numeric">Phone number</th>
+                <th class="mdl-data-table__cell--non-numeric">Edit</th>
+                <th class="mdl-data-table__cell--non-numeric">Delete</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+<div class="mdl-cell mdl-cell--3-col">
+    <button id="new-employee" onclick="window.location.hash = '/employee/new'" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+        Add new employee
+    </button>
+</div>
+<dialog id="confirm-dialog" class="mdl-dialog">
+    <h4 class="mdl-dialog__title">Question?</h4>
+    <div class="mdl-dialog__content">
+        <p>
+            Are you sure to delete employee <span id="dialog-employeeId">ID</span>?
+        </p>
+    </div>
+    <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button agree">Yes</button>
+        <button type="button" class="mdl-button disagree">No</button>
+    </div>
+</dialog>

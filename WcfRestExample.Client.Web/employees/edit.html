@@ -1,0 +1,38 @@
+﻿<div class="mdl-cell mdl-cell--12-col">
+    <h5>Employee edit</h5>
+</div>
+<form id="employee-form" action="#" class="mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col">
+    <div class="mdl-grid">
+        <div id="employeeId-field" class="mdl-cell mdl-cell--12-col mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col-desktop">
+                <input class="mdl-textfield__input" type="text" id="employeeId" disabled />
+                <label class="mdl-textfield__label" for="employeeId">Employee ID</label>
+            </div>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col-desktop">
+            <input class="mdl-textfield__input" type="text" id="name" required />
+            <label class="mdl-textfield__label" for="name">Name</label>
+            <span class="mdl-textfield__error">Field is required</span>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col-desktop">
+            <input class="mdl-textfield__input" type="text" id="address" required />
+            <label class="mdl-textfield__label" for="address">Address</label>
+            <span class="mdl-textfield__error">Field is required</span>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col-desktop">
+            <input class="mdl-textfield__input" type="email" id="email" />
+            <label class="mdl-textfield__label" for="email">Email</label>
+            <span class="mdl-textfield__error">Set correct email address</span>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col-desktop">
+            <input class="mdl-textfield__input" type="text" id="phone" />
+            <label class="mdl-textfield__label" for="phone">Phone number</label>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col">
+            <input id="submit-employee" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" value="Submit" />
+            <button id="cancel-employee" onclick="event.preventDefault(); window.location.hash = '/employee'" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                Cancel
+            </button>
+        </div>
+    </div>
+</form>

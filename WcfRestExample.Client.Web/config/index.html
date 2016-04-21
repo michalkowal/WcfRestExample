@@ -1,0 +1,27 @@
+﻿<div class="mdl-cell mdl-cell--12-col">
+    <h5>Configuration</h5>
+</div>
+<form id="config-form" action="#" class="mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col">
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col-desktop">
+                <input class="mdl-textfield__input" type="text" id="server" required />
+                <label class="mdl-textfield__label" for="server">Server address</label>
+                <span class="mdl-textfield__error">Field is required</span>
+            </div>
+        </div>
+        <div class="mdl-cell mdl-cell--12-col-desktop">
+            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="tracing">
+                <input type="checkbox" id="tracing" class="mdl-switch__input">
+                <span class="mdl-switch__label">Tracing enabled</span>
+            </label>
+        </div>
+        <div class="mdl-cell mdl-cell--12-col">
+            <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" value="Save" />
+        </div>
+    </div>
+</form>
+<div id="success-snackbar" class="mdl-js-snackbar mdl-snackbar mdl-color--indigo-100">
+    <strong><div class="mdl-snackbar__text mdl-color-text--green-600"></div></strong>
+    <button class="mdl-snackbar__action" type="button"></button>
+</div>

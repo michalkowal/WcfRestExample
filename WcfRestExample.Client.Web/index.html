@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Wcf Rest Example</title>
+
+    <link rel="stylesheet" type="text/css" href="./common/mdl/material.css">
+    <link rel="stylesheet" type="text/css" href="./common/mdl/dialog-polyfill.css" />
+    <link rel="stylesheet" type="text/css" href="./common/app.css">
+
+    <script type="text/javascript" src="./common/jquery/jquery-2.2.2.js"></script>
+    <script type="text/javascript" src="./common/mdl/material.js"></script>
+    <script type="text/javascript" src="./common/mdl/dialog-polyfill.js"></script>
+    <script type="text/javascript" src="./common/jquery/jquery.sprintf.js"></script>
+    <script type="text/javascript" src="./common/jquery/jquery.hashchange.js"></script>
+    <script type="text/javascript" src="./common/jquery/jquery.hash-router.js"></script>
+    <script type="text/javascript" src="./common/jquery/jquery.hash-router-ajax-response.js"></script>
+    <script type="text/javascript" src="./common/app.js"></script>
+
+    <script type="text/javascript" src="./home/home.js"></script>
+    <script type="text/javascript" src="./employees/employeesList.js"></script>
+    <script type="text/javascript" src="./employees/employee.js"></script>
+    <script type="text/javascript" src="./config/config.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body class="mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+    <!-- Always shows a header, even in smaller screens. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">Wcf Rest Example</span>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation. We hide it in small screens. -->
+                <nav class="mdl-navigation mdl-layout--large-screen-only">
+                </nav>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Wcf Rest Example</span>
+            <nav class="mdl-navigation">
+            </nav>
+        </div>
+        <div class="loading-panel">
+            <div id="loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate hide"></div>
+        </div>
+
+        <main class="mdl-layout__content">
+            <div id="page-content" class="page-content mdl-grid">
+            </div>
+        </main>
+
+        <footer class="mdl-mini-footer">
+            <div class="mdl-mini-footer__left-section">
+                <div class="mdl-logo">Wcf Rest example created by Michał Kowal</div>
+            </div>
+        </footer>
+
+    </div>
+</body>
+</html>

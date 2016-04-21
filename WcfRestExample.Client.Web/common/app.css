@@ -1,0 +1,29 @@
+﻿.mdl-mini-footer {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.mdl-snackbar {
+    bottom: 36px;
+}
+
+.hide {
+    display: none;
+}
+
+.loading-panel {
+    height: 4px;
+    margin-top: 2px;
+}
+
+#loading {
+    width: 100%;
+}
+
+.mdl-layout__content {
+    overflow-x: auto;
+}
+
+._dialog_overlay {
+    z-index: 0 !important;
+}
