@@ -3,11 +3,13 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Threading.Tasks;
 using WcfRestExample.Common.Data;
 
@@ -22,12 +24,14 @@ namespace WcfRestExample.IntegrationTests
         private Employee _newEmployee1 = new Employee() { EmployeeID = 0, Name = "Test Employee 1", Address = "Test Address 1" };
         private Employee _newEmployee2 = new Employee() { EmployeeID = 0, Name = "Test Employee 2", Address = "Test Address 2", Email = "tst@email", PhoneNumber = "11-22-33" };
 
+        private string _dbFileName;
+
         [OneTimeSetUp]
         public void Start()
         {
-            string dbFileName = ConfigurationManager.AppSettings["noSqlDb"];
-            System.IO.File.Copy(dbFileName, dbFileName + ".tmp", true);
-            System.IO.File.Delete(dbFileName);
+            string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string hostPath = Path.Combine(assemblyFolder, "..\\..\\..\\WcfRestExample.Service.Host");
+            _dbFileName = Path.Combine(hostPath, ConfigurationManager.AppSettings["noSqlDb"]);
         }
 
         [SetUp]
@@ -48,19 +52,17 @@ namespace WcfRestExample.IntegrationTests
             response = await _httpClient.PostAsJsonAsync("", _newEmployee2);
             Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
 
-            using (LiteDatabase db = new LiteDatabase(ConfigurationManager.AppSettings["noSqlDb"]))
+            using (LiteDatabase db = new LiteDatabase(_dbFileName))
             {
                 LiteCollection<Employee> col = db.GetCollection<Employee>("Employee");
 
                 IEnumerable<Employee> all = col.FindAll();
 
-                Assert.AreEqual(2, all.Count());
-
-                Employee dbEnt1 = all.ElementAt(0);
+                Employee dbEnt1 = all.ElementAt(all.Count() - 2);
                 _newEmployee1.EmployeeID = dbEnt1.EmployeeID;
                 AssertEx.PropertyValuesAreEquals(_newEmployee1, dbEnt1);
 
-                Employee dbEnt2 = all.ElementAt(1);
+                Employee dbEnt2 = all.ElementAt(all.Count() - 1);
                 _newEmployee2.EmployeeID = dbEnt2.EmployeeID;
                 AssertEx.PropertyValuesAreEquals(_newEmployee2, dbEnt2);
             }
@@ -74,10 +76,8 @@ namespace WcfRestExample.IntegrationTests
 
             IEnumerable<Employee> all = await response.Content.ReadAsAsync<IEnumerable<Employee>>();
 
-            Assert.AreEqual(2, all.Count());
-
-            AssertEx.PropertyValuesAreEquals(_newEmployee1, all.ElementAt(0));
-            AssertEx.PropertyValuesAreEquals(_newEmployee2, all.ElementAt(1));
+            AssertEx.PropertyValuesAreEquals(_newEmployee1, all.ElementAt(all.Count() - 2));
+            AssertEx.PropertyValuesAreEquals(_newEmployee2, all.ElementAt(all.Count() - 1));
         }
 
         [Test]
@@ -102,7 +102,7 @@ namespace WcfRestExample.IntegrationTests
             HttpResponseMessage response = await _httpClient.PutAsJsonAsync(_newEmployee1.EmployeeID.ToString(), _newEmployee1);
             Assert.AreEqual(HttpStatusCode.NoContent, response.StatusCode);
 
-            using (LiteDatabase db = new LiteDatabase(ConfigurationManager.AppSettings["noSqlDb"]))
+            using (LiteDatabase db = new LiteDatabase(_dbFileName))
             {
                 LiteCollection<Employee> col = db.GetCollection<Employee>("Employee");
 
@@ -123,15 +123,13 @@ namespace WcfRestExample.IntegrationTests
 
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
-            using (LiteDatabase db = new LiteDatabase(ConfigurationManager.AppSettings["noSqlDb"]))
+            using (LiteDatabase db = new LiteDatabase(_dbFileName))
             {
                 LiteCollection<Employee> col = db.GetCollection<Employee>("Employee");
 
-                IEnumerable<Employee> all = col.FindAll();
+                Employee dbEmpl = col.FindById(_newEmployee2.EmployeeID);
 
-                Assert.AreEqual(1, all.Count());
-
-                Assert.AreNotEqual(_newEmployee2.EmployeeID, all.First().EmployeeID);
+                Assert.IsNull(dbEmpl);
             }
         }
 
@@ -142,13 +140,13 @@ namespace WcfRestExample.IntegrationTests
 
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
-            using (LiteDatabase db = new LiteDatabase(ConfigurationManager.AppSettings["noSqlDb"]))
+            using (LiteDatabase db = new LiteDatabase(_dbFileName))
             {
                 LiteCollection<Employee> col = db.GetCollection<Employee>("Employee");
 
-                IEnumerable<Employee> all = col.FindAll();
+                Employee dbEmpl = col.FindById(_newEmployee1.EmployeeID);
 
-                Assert.AreEqual(0, all.Count());
+                Assert.IsNull(dbEmpl);
             }
         }
 
@@ -159,14 +157,6 @@ namespace WcfRestExample.IntegrationTests
             {
                 _httpClient.Dispose();
             }
-        }
-
-        [OneTimeTearDown]
-        public void End()
-        {
-            string dbFileName = ConfigurationManager.AppSettings["noSqlDb"];
-            System.IO.File.Copy(dbFileName + ".tmp", dbFileName, true);
-            System.IO.File.Delete(dbFileName + ".tmp");
         }
     }
 }

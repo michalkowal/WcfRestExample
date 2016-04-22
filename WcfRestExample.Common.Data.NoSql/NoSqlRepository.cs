@@ -47,8 +47,20 @@ namespace WcfRestExample.Common.Data.NoSql
             {
                 if (string.IsNullOrEmpty(_databasePath))
                 {
-                    string dbPath = HttpRuntime.BinDirectory + System.Configuration.ConfigurationManager.AppSettings["noSqlDb"];
-                    _databasePath = dbPath ?? "WcfRestExample.db";
+                    string dbFile = System.Configuration.ConfigurationManager.AppSettings["noSqlDb"] ?? "WcfRestExample.db";
+                    try
+                    {
+                        if (HttpRuntime.BinDirectory != null)
+                        {
+                            string dbPath = System.IO.Path.Combine(HttpRuntime.BinDirectory, "..");
+                            dbFile = System.IO.Path.Combine(dbPath, dbFile);
+                        }
+                    }
+                    catch (ArgumentNullException ex)
+                    {
+                    }
+
+                    _databasePath = dbFile;
                 }
                 return _databasePath;
             }

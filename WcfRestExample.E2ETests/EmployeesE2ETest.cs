@@ -134,12 +134,13 @@ namespace WcfRestExample.E2ETests
         [TearDown]
         public void End()
         {
-            _driver.Close();
+            
         }
 
         [OneTimeTearDown]
         public void Quit()
         {
+            _driver.Close();
             _driver.Quit();
         }
     }

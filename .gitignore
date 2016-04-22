@@ -234,3 +234,10 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+# DB Files
+.db
+
+# Logs
+[Ll]og/
+[Ll]ogs/
