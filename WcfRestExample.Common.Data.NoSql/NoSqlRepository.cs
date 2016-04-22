@@ -3,6 +3,7 @@ using NLog;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Web;
 using WcfRestExample.Common.Infrastructure;
 using WcfRestExample.Common.Interfaces;
 
@@ -46,7 +47,7 @@ namespace WcfRestExample.Common.Data.NoSql
             {
                 if (string.IsNullOrEmpty(_databasePath))
                 {
-                    string dbPath = System.Configuration.ConfigurationManager.AppSettings["noSqlDb"];
+                    string dbPath = HttpRuntime.BinDirectory + System.Configuration.ConfigurationManager.AppSettings["noSqlDb"];
                     _databasePath = dbPath ?? "WcfRestExample.db";
                 }
                 return _databasePath;
