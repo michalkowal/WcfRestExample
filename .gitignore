@@ -236,7 +236,7 @@ _Pvt_Extensions
 .fake/
 
 # DB Files
-.db
+*.db
 
 # Logs
 [Ll]og/
